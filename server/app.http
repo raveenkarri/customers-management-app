@@ -1,0 +1,58 @@
+GET http://localhost:5000/api/customers
+###
+
+POST http://localhost:5000/api/customers
+Content-Type: application/json
+
+{
+  "first_name": "sai",
+  "last_name": "pasi",
+  "phone_number": "8104"
+}
+
+###
+GET http://localhost:5000/api/customers/1
+###
+
+PUT http://localhost:5000/api/customers/1
+Content-Type: application/json
+
+{
+  "first_name": "Raveen",
+  "last_name": "karri",
+  "phone_number": "81850"
+}
+
+### Add Address for a Customer
+POST http://localhost:5000/api/customers/1/addresses
+Content-Type: application/json
+
+{
+  "address_details": "123 Main Street",
+  "city": "Hyderabad",
+  "state": "Telangana",
+  "pin_code": "500001"
+}
+
+###
+
+### Get All Addresses for a Customer
+GET http://localhost:5000/api/customers/1/addresses
+
+###
+
+### Update Address by Address ID
+PUT http://localhost:5000/api/addresses/1
+Content-Type: application/json
+
+{
+  "address_details": "456 Park Avenue",
+  "city": "Secunderabad",
+  "state": "Telangana",
+  "pin_code": "500003"
+}
+
+###
+
+### Delete Address by Address ID
+DELETE http://localhost:5000/api/addresses/1
