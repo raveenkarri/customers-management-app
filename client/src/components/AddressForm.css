@@ -1,0 +1,33 @@
+.address-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.address-form input,
+.address-form textarea {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.address-form button {
+  background: #2ecc71;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.address-form button:hover {
+  background: #27ae60;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .address-form input,
+  .address-form textarea {
+    font-size: 14px;
+  }
+}
