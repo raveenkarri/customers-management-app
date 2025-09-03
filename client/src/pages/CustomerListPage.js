@@ -11,17 +11,25 @@ function CustomerListPage() {
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [hasMore, setHasMore] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const fetchCustomers = () => {
-    axios
-      .get("http://localhost:5000/api/customers", {
-        params: { search, sortBy, order, page, limit },
-      })
-      .then((res) => {
-        setCustomers(res.data.data);
-        setHasMore(res.data.data.length >= limit);
-      })
-      .catch((err) => console.error(err));
+  const fetchCustomers = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await axios.get(
+        "https://customers-management-app.onrender.com/api/customers",
+        { params: { search, sortBy, order, page, limit } }
+      );
+      setCustomers(res.data.data);
+      setHasMore(res.data.data.length >= limit);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to load customers. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -55,17 +63,31 @@ function CustomerListPage() {
         </select>
       </div>
 
-      {/* Customer List */}
-      <CustomerList customers={customers} refresh={fetchCustomers} />
+      {/* States */}
+      {loading && <p className="loading">Loading customers...</p>}
+      {error && <p className="error">{error}</p>}
+      {!loading && customers.length === 0 && !error && (
+        <p className="empty">No customers found.</p>
+      )}
 
+      {/* Customer List */}
+      {!loading && customers.length > 0 && (
+        <CustomerList customers={customers} refresh={fetchCustomers} />
+      )}
 
       {/* Pagination */}
       <div className="pagination">
-        <button onClick={() => setPage((p) => Math.max(p - 1, 1))} disabled={page === 1}>
+        <button
+          onClick={() => setPage((p) => Math.max(p - 1, 1))}
+          disabled={page === 1 || loading}
+        >
           Previous
         </button>
         <span>Page {page}</span>
-        <button onClick={() => setPage((p) => p + 1)} disabled={!hasMore}>
+        <button
+          onClick={() => setPage((p) => p + 1)}
+          disabled={!hasMore || loading}
+        >
           Next
         </button>
       </div>

@@ -13,7 +13,7 @@ function CustomerFormPage() {
 
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:5000/api/customers/${id}`)
+      axios.get(`https://customers-management-app.onrender.com/api/customers/${id}`)
         .then(res => {
           setFirstName(res.data.data.first_name);
           setLastName(res.data.data.last_name);
@@ -27,11 +27,11 @@ function CustomerFormPage() {
     const payload = { first_name, last_name, phone_number };
 
     if (id) {
-      axios.put(`http://localhost:5000/api/customers/${id}`, payload)
+      axios.put(`https://customers-management-app.onrender.com/api/customers/${id}`, payload)
         .then(() => navigate("/"))
         .catch(err => console.error(err));
     } else {
-      axios.post("http://localhost:5000/api/customers", payload)
+      axios.post("https://customers-management-app.onrender.com/api/customers", payload)
         .then(() => navigate("/"))
         .catch(err => console.error(err));
     }

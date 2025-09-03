@@ -24,10 +24,10 @@ function AddressForm({ customerId, address, onSuccess }) {
     try {
       if (address) {
         // Update existing address
-        await axios.put(`http://localhost:5000/api/addresses/${address.id}`, payload);
+        await axios.put(`https://customers-management-app.onrender.com/api/addresses/${address.id}`, payload);
       } else {
         // Add new address
-        await axios.post(`http://localhost:5000/api/customers/${customerId}/addresses`, payload);
+        await axios.post(`https://customers-management-app.onrender.com/api/customers/${customerId}/addresses`, payload);
       }
 
       if (!address) {

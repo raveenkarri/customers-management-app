@@ -9,7 +9,7 @@ function CustomerList({ customers, refresh }) {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this customer?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/customers/${id}`);
+        await axios.delete(`https://customers-management-app.onrender.com/api/customers/${id}`);
         refresh(); // refresh the list after deletion
       } catch (err) {
         console.error(err);

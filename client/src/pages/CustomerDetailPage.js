@@ -20,14 +20,14 @@ function CustomerDetailPage() {
 
   const fetchCustomer = () => {
     axios
-      .get(`http://localhost:5000/api/customers/${id}`)
+      .get(`https://customers-management-app.onrender.com/api/customers/${id}`)
       .then((res) => setCustomer(res.data.data))
       .catch((err) => console.error(err));
   };
 
   const fetchAddresses = () => {
     axios
-      .get(`http://localhost:5000/api/customers/${id}/addresses`)
+      .get(`https://customers-management-app.onrender.com/api/customers/${id}/addresses`)
       .then((res) => setAddresses(res.data.data))
       .catch((err) => console.error(err));
   };
@@ -35,7 +35,7 @@ function CustomerDetailPage() {
   const handleDeleteAddress = async (addressId) => {
     if (window.confirm("Are you sure you want to delete this address?")) {
       await axios
-        .delete(`http://localhost:5000/api/addresses/${addressId}`)
+        .delete(`https://customers-management-app.onrender.com/api/addresses/${addressId}`)
         .then(fetchAddresses)
         .catch((err) => console.error(err));
     }
